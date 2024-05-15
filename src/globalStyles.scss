@@ -1,0 +1,64 @@
+@import './variables.scss';
+
+* {
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+}
+
+html {
+  background-color: $colorWhite;
+}
+
+body {
+  padding: 0;
+  margin: 0;
+  overflow-y: scroll;
+}
+
+
+a {
+  text-decoration: none;
+  color: $colorWhite;
+}
+
+dd::before {
+  content: "- ";
+}
+
+.content {
+  flex: 1 1 auto;
+}
+
+.container {
+  transition: $transition;
+  width: 1000px;
+  margin: 0 auto;
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+}
+
+.checkbox :global(.ant-checkbox-inner) {
+  width: 20px;
+  height: 20px;
+}
+
+
+@media (max-width: 920px) {
+  .container {
+    width: 740px;
+  }
+}
+
+@media (max-width: 750px) {
+  .container {
+    width: 470px;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    width: 300px;
+  }
+}

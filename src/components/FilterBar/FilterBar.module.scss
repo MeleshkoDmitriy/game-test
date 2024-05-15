@@ -1,0 +1,25 @@
+@import '../../globalStyles.scss';
+@import '../../variables.scss';
+
+.wrapper {
+    margin-top: $padding;
+    padding: $padding;
+    width: 100%;
+    min-height: 100px;
+    background-color: $colorLightGrey;
+    border-radius: $radius;
+
+    display: flex;
+    gap: 50px;
+}
+
+.sortButtons,
+.platforms,
+.checkboxes {
+    display: flex;
+    gap: 10px;
+}
+
+.checkboxes {
+    padding-top: $padding;
+}

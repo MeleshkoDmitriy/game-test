@@ -1,0 +1,14 @@
+@import '../../globalStyles.scss';
+@import '../../variables.scss';
+
+.wrapper {
+    display: flex;
+    justify-content: center;
+}
+
+.gamesList {
+    padding: $padding 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+    gap: $padding * 2;
+}

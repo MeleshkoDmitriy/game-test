@@ -1,0 +1,68 @@
+@import '../../globalStyles.scss';
+@import '../../variables.scss';
+
+p, dt, dd {
+    font-size: 18px;
+}
+
+.wrapper {
+
+    h1 {
+        text-align: center;
+    }
+
+    .body {
+        width: 100%;
+        display: flex;
+        gap: $padding;
+
+        h3 {
+            margin-top: 0;
+        }
+
+        p {
+            margin: 0;
+            text-align: justify;
+        }
+    }
+}
+
+.image {
+    img {
+        width: 300px;
+    }
+}
+
+.screenshots {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    .screenshot {
+        width: 300px;
+        height: auto;
+        overflow: hidden;
+    
+        img {
+            width: 100%;
+            height: auto;
+            object-fit: contain;
+        }
+    }
+      
+}
+.screenshot {
+    width: 300px;
+    height: auto;
+    overflow: hidden;
+
+    img {
+        width: 100%;
+        height: auto;
+        object-fit: contain;
+    }
+}
+  
+
+  
