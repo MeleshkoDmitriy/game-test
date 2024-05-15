@@ -11,6 +11,8 @@ import { pushGames } from '../../store/Slices/querySlice';
 export const HomePage = () => {
     const { queryParams } = useAppSelector((state) => state.queryParams)
 
+    console.log(queryParams)
+
     const { data: list, isLoading } = useGetGamesWithParamsQuery(queryParams); 
 
     const dispatch = useAppDispatch();

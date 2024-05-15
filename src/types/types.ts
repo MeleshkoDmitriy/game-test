@@ -10,5 +10,11 @@ export type TGame = {
     description: string,
     poster: string,
     screenshots: string[]
-  }
-  
+}
+
+export type TQueryParams = {
+  platform?: string[],
+  onlineMultiplayer?: boolean,
+  russianVoiceover?: boolean,
+  maxOfflinePlayers?: number,
+}

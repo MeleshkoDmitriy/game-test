@@ -1,36 +1,54 @@
 import { useAppDispatch } from '../../hooks/hook'
 import styles from './FilterBar.module.scss'
-import { filterByMultiPlayers, filterByRusVoice, sortGamesByRating, throwQueryParams } from '../../store/Slices/querySlice';
+import { sortGamesByRating, throwQueryParams } from '../../store/Slices/querySlice';
 import { useEffect, useState } from 'react';
 import { ArrowDownOutlined, ArrowUpOutlined } from '@ant-design/icons';
 import { Button, Checkbox } from 'antd';
-import { TGame } from '../../types/types';
+import { TGame, TQueryParams } from '../../types/types';
+import * as qs from 'qs';
+
 
 export const FilterBar: React.FC = () => {
     const [sorting, setSorting] = useState<[keyof TGame | undefined, 'ASC' | 'DESC' | undefined]>([undefined, undefined]);
     const [isVoice, setVoice] = useState<boolean>(false);
     const [isMultiPlayer, setMultiPlayer] = useState<boolean>(false);
+    const [isOfflinePlayers, setOfflinePlayers] = useState<boolean>(false);
     const [selectedPlatform, setSelectedPlatform] = useState<string | null>('All');
   
     const dispatch = useAppDispatch();
   
     const filterByPlatform = (platform: string) => {
       setSelectedPlatform(platform);
-      setMultiPlayer(false);
-      setVoice(false);
-  
-      if (platform === 'All') {
-        dispatch(throwQueryParams(''));
-      } else {
-        dispatch(throwQueryParams(`?platform[]=${platform}`));
-      }
     };
-  
+
     useEffect(() => {
+      const queryParams: TQueryParams = {};
+    
+      if (selectedPlatform && selectedPlatform !== 'All') {
+        queryParams.platform = [selectedPlatform];
+      }
+    
+      if (isMultiPlayer) {
+        queryParams.onlineMultiplayer = true;
+      }
+    
+      if (isVoice) {
+        queryParams.russianVoiceover = true;
+      }
+    
+      if (isOfflinePlayers) {
+        queryParams.maxOfflinePlayers = 2;
+      }
+    
+      const queryString = qs.stringify(queryParams, {
+        addQueryPrefix: true,
+        encodeValuesOnly: true,
+      });
+    
+      dispatch(throwQueryParams(queryString));
       dispatch(sortGamesByRating(sorting));
-      dispatch(filterByMultiPlayers(isMultiPlayer));
-      dispatch(filterByRusVoice(isVoice));
-    }, [dispatch, sorting, isVoice, isMultiPlayer]);
+    }, [selectedPlatform, isVoice, isMultiPlayer, isOfflinePlayers, sorting, dispatch]);
+    
   
     return (
       <section className={styles.wrapper}>
@@ -98,6 +116,13 @@ export const FilterBar: React.FC = () => {
               onClick={() => setVoice(prev => !prev)}
             >
               Russian Voiceover
+            </Checkbox>
+            <Checkbox
+              className={styles.checkbox}
+              checked={isOfflinePlayers}
+              onClick={() => setOfflinePlayers(prev => !prev)}
+            >
+              Offline Players More Than One
             </Checkbox>
           </div>
         </div>
